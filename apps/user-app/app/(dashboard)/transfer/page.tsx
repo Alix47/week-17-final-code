@@ -1,10 +1,9 @@
-import prisma from "@repo/db/client";
+import prisma, { OnRampStatus } from "@repo/db/client";
 import { AddMoney } from "../../../components/AddMoneyCard";
 import { BalanceCard } from "../../../components/BalanceCard";
 import { OnRampTransactions } from "../../../components/OnRampTransactions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
-import {OnRampStatus} from "@prisma/client"
 
 async function getBalance() {
     const session = await getServerSession(authOptions);
