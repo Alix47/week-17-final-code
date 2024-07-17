@@ -4,6 +4,7 @@ import { BalanceCard } from "../../../components/BalanceCard";
 import { OnRampTransactions } from "../../../components/OnRampTransactions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
+import {OnRampStatus} from '@prisma/client'
 
 async function getBalance() {
     const session = await getServerSession(authOptions);
@@ -18,6 +19,16 @@ async function getBalance() {
     }
 }
 
+type OnRampStatusType = OnRampStatus
+interface OnRampTxn{
+    id: number;
+    status: OnRampStatusType;
+    token: string;
+    provider: string;
+    amount: number;
+    startTime: Date;
+    userId: number;
+}
 async function getOnRampTransactions() {
     const session = await getServerSession(authOptions);
     const txns = await prisma.onRampTransaction.findMany({
@@ -25,7 +36,7 @@ async function getOnRampTransactions() {
             userId: Number(session?.user?.id)
         }
     });
-    return txns.map(t => ({
+    return txns.map((t: OnRampTxn) => ({
         time: t.startTime,
         amount: t.amount,
         status: t.status,
