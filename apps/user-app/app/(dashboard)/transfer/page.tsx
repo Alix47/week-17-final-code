@@ -4,7 +4,7 @@ import { BalanceCard } from "../../../components/BalanceCard";
 import { OnRampTransactions } from "../../../components/OnRampTransactions";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
-import {OnRampStatus} from '@prisma/client'
+import {OnRampStatus} from "@prisma/client"
 
 async function getBalance() {
     const session = await getServerSession(authOptions);
@@ -18,9 +18,8 @@ async function getBalance() {
         locked: balance?.locked || 0
     }
 }
-
 type OnRampStatusType = OnRampStatus
-interface OnRampTxn{
+interface OnRampTxn {
     id: number;
     status: OnRampStatusType;
     token: string;
@@ -44,7 +43,7 @@ async function getOnRampTransactions() {
     }))
 }
 
-export default async function() {
+export default async function () {
     const balance = await getBalance();
     const transactions = await getOnRampTransactions();
 
