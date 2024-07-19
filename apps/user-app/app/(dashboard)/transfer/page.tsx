@@ -1,3 +1,4 @@
+"use client"
 import prisma from "@repo/db";
 import { OnRampStatus } from "@prisma/client/edge";
 import { AddMoney } from "../../../components/AddMoneyCard";
